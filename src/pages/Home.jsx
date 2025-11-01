@@ -135,7 +135,7 @@ import Landing from '../components/Landing';
 import Info from '../components/Info';
 import Products from '../components/Products';
 import Giude from '../components/Giude';
-import Experts from '../components/experts';
+import Experts from '../components/Experts';
 
 export default function Home() {
   return (
