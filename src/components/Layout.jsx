@@ -1,9 +1,10 @@
 
 // import Footer from "../Components/Footer";
 import { Outlet, useLocation } from "react-router-dom";
-import ResponsiveAppBar from "./navbar";
+// import ResponsiveAppBar from "./navbar";
 import { Box } from "@mui/material";
 import Footer from "./Footer";
+import ResponsiveAppBar from "./Navbar";
 
 function Layout() {
   const location = useLocation();
