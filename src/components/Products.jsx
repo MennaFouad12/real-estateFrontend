@@ -7,6 +7,8 @@ import { Box, Container, IconButton, Typography, Grid } from '@mui/material'
 import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify';
 import React from 'react'
 import ProductCard from './ProductCard';
+import { fetchProperties } from '../api/property';
+import { useQuery } from '@tanstack/react-query';
 
 export const products = [
   {
@@ -51,6 +53,12 @@ export const products = [
 ];
 
 export default function Products() {
+
+   const { data: properties, isLoading, isError, error } = useQuery({
+  queryKey: ['properties'],
+  queryFn: fetchProperties,
+})
+   if(properties) console.log(properties);
   return (
     <Box sx={{ backgroundColor: "#E5E3DD", py: { xs: 6, md: 10 } }}>
       <Container>
@@ -105,9 +113,9 @@ export default function Products() {
 
         {/* RESPONSIVE CARDS GRID */}
         <Grid container spacing={3}>
-          {products.map((product) => (
-            <Grid item xs={12} sm={6} md={4} key={product.id}>
-              <ProductCard product={product} />
+          {properties?.data.map((property) => (
+            <Grid item xs={12} sm={6} md={4} key={property._id}>
+              <ProductCard property={property} />
             </Grid>
           ))}
         </Grid>

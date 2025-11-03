@@ -21,18 +21,24 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import AddHomeWorkIcon from "@mui/icons-material/AddHomeWork";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import SideBar from "../components/SideBar";
+import { fetchProperties } from '../api/property';
+import { useQuery } from '@tanstack/react-query';
 export default function ListProperty() {
-  const properties = [
-  {
-    id: 1,
-    property: "Oceanview Oasis Serenity Escape",
-    dates: "8/28/2025 to 8/30/2025",
-    address:"Lagos, Nigeria",
-    amount: "$398",
-    status: "Completed",
-    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=100",
-  },
-  ]
+   const { data: properties, isLoading, isError, error } = useQuery({
+  queryKey: ['properties'],
+  queryFn: fetchProperties,
+})
+  // const properties = [
+  // {
+  //   id: 1,
+  //   property: "Oceanview Oasis Serenity Escape",
+  //   dates: "8/28/2025 to 8/30/2025",
+  //   address:"Lagos, Nigeria",
+  //   amount: "$398",
+  //   status: "Completed",
+  //   img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=100",
+  // },
+  // ]
   return (
       <TableContainer component={Paper} sx={{ borderRadius: 3 }}>
           <Table>
@@ -46,21 +52,21 @@ export default function ListProperty() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {properties.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.id}</TableCell>
+              {properties?.data.map((row,index) => (
+                <TableRow key={row._id}>
+                  <TableCell>{index}</TableCell>
                   <TableCell>
                     <Box sx={{ display: "flex", alignItems: "center" }}>
                       <Avatar
-                        src={row.img}
-                        alt={row.property}
+                        src={row.images[0].url}
+                        alt={row.propertyName}
                         sx={{ width: 40, height: 40, mr: 1 }}
                       />
-                      {row.property}
+                      {row.propertyName}
                     </Box>
                   </TableCell>
                   <TableCell>{row.address}</TableCell>
-                  <TableCell>{row.amount}</TableCell>
+                  <TableCell>{row.rentPrice}</TableCell>
                   <TableCell>
                     <Box
                       sx={{

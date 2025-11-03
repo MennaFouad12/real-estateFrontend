@@ -36,6 +36,9 @@ const navigate = useNavigate();
     onSubmit: async (values) => {
       try {
         const data=await loginApi(values);
+
+        localStorage.setItem("token",data.token);
+        
         setUser(data.user);
         console.log("user",user);
         alert("✅you login successfully!");

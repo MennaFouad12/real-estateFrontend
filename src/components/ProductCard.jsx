@@ -70,42 +70,43 @@ import SquareFootIcon from "@mui/icons-material/SquareFoot";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ property }) {
   const navigate = useNavigate();
 
   return (
     <Card
       sx={{
-        maxWidth: 340,
+        width: 300,
+        height: 400,
         borderRadius: 3,
         boxShadow: 3,
         transition: "transform 0.3s",
         "&:hover": { transform: "translateY(-5px)" },
       }}
-      onClick={() => navigate(`/listings/${product.id}`)}
+      onClick={() => navigate(`/listings/${property._id}`)}
     >
       <CardActionArea>
         <CardMedia
           component="img"
           height="200"
-          image={product.image}
-          alt={product.title}
+          image={property.images[0].url}
+          alt={property.propertyName}
           sx={{ borderTopLeftRadius: 12, borderTopRightRadius: 12 }}
         />
 
         <CardContent>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Typography variant="subtitle1" fontWeight="bold">
-              {product.type}
+              {property.propertyType}
             </Typography>
             <Typography sx={{ color: "#E3B300", fontWeight: "bold" }}>
-              ${product.price} | ${product.nightPrice}
+              ${property.rentPrice} | ${property.rentPrice}
               <sub>/night</sub>
             </Typography>
           </Box>
 
           <Typography variant="h6" sx={{ fontWeight: "bold", mt: 0.5 }}>
-            {product.title}
+            {property.propertyName}
           </Typography>
 
           <Box
@@ -119,21 +120,21 @@ export default function ProductCard({ product }) {
             }}
           >
             <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-              <BedIcon fontSize="small" /> {product.beds}
+              <BedIcon fontSize="small" /> {property.bedrooms}
             </Box>
             <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-              <BathtubIcon fontSize="small" /> {product.baths}
+              <BathtubIcon fontSize="small" /> {property.bathrooms}
             </Box>
             <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-              <GarageIcon fontSize="small" /> {product.garages}
+              <GarageIcon fontSize="small" /> 3
             </Box>
             <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-              <SquareFootIcon fontSize="small" /> {product.area}
+              <SquareFootIcon fontSize="small" /> {property.area}
             </Box>
           </Box>
 
           <Typography sx={{ color: "grey", mt: 1 }}>
-            {product.description}
+            {property.propertyDescription}
           </Typography>
         </CardContent>
       </CardActionArea>
